@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 import ru.denisch.ATM;
+import ru.denisch.AtmException;
 import ru.denisch.CurType;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,7 +11,12 @@ class ATMTest {
     public void testGetMoney() {
         ATM atm = new ATM();
 
-        assertEquals(atm.getMoney(1000), 1000);
+        try {
+            assertEquals(atm.getMoney(1000), 1000);
+        }catch (AtmException e)
+        {
+            assertEquals(1, 2);
+        }
         assertEquals(atm.getAllPrice(), 1150);
 
     }

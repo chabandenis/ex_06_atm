@@ -3,7 +3,7 @@ package ru.denisch;
 public class ATM {
     private Cassette cassette = new Cassette();
 
-    public long getMoney(long value) {
+    public long getMoney(long value) throws AtmException {
 
         System.out.println("before operation");
         cassette.status();
@@ -27,7 +27,7 @@ public class ATM {
         }
 
         if (retMoney > 0) {
-            throw new RuntimeException("atm doesn't have money for you. go to another atm");
+            throw new AtmException("atm doesn't have money for you. go to another atm");
         }
 
         System.out.println("");
@@ -60,3 +60,5 @@ public class ATM {
         return cassette.getAllPrice();
     }
 }
+
+
