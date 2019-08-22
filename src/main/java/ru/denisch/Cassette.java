@@ -3,6 +3,8 @@ package ru.denisch;
 import java.util.*;
 
 public class Cassette {
+
+
     private Map<CurType, Integer> allMoney = new TreeMap<>(Collections.reverseOrder());
 
     public Cassette() {
