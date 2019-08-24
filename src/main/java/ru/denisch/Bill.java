@@ -13,5 +13,10 @@ public class Bill {
         this.serNumber = serNumber;
     }
 
-
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "serNumber='" + serNumber + '\'' +
+                '}';
+    }
 }

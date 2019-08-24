@@ -2,19 +2,26 @@ package ru.denisch;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CassetteNewTest {
 
     @Test
+    void TestEnum() {
+
+        CurType curType = CurType.RUR100;
+
+        System.out.println("_" + curType.cost());
+
+
+    }
+
+    @Test
     void putGet() {
         CassetteNew cassette = new CassetteNew();
-        Set<Bill> bills = new HashSet<>();
+        List<Bill> bills = new ArrayList<>();
 
         bills.add(new Bill("001"));
         bills.add(new Bill("002"));
@@ -22,15 +29,18 @@ class CassetteNewTest {
 
         cassette.put(bills);
 
+        System.out.println(cassette.toString());
+
         HashSet d=new HashSet();
+/*
+        Bill b1 = cassette.get(1).get(0);
+        Bill b2 = (Bill)cassette.get(1).get(0);
+        Bill b3 = (Bill)cassette.get(1).get(0);
+*/
+        assertEquals(cassette.get(1).get(0).getSerNumber(), "003");
+        assertEquals(cassette.get(1).get(0).getSerNumber(), "002");
+        assertEquals(cassette.get(1).get(0).getSerNumber(), "001");
 
-        Bill b1 = (Bill)cassette.get(1).toArray()[0];
-        Bill b2 = (Bill)cassette.get(1).toArray()[0];
-        Bill b3 = (Bill)cassette.get(1).toArray()[0];
-
-        assertEquals(b1.getSerNumber(), "003");
-        assertEquals(b2.getSerNumber(), "002");
-        assertEquals(b3.getSerNumber(), "001");
 
     }
 
