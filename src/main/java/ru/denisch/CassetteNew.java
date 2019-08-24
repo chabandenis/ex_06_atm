@@ -45,10 +45,10 @@ public class CassetteNew {
 
     @Override
     public String toString() {
-        String str = "";
+        StringBuffer str = new StringBuffer();
         for(Bill bill : q){
-            str += q.toString();
+            str.append(bill.toString());
         }
-        return str;
+        return str.toString();
     }
 }

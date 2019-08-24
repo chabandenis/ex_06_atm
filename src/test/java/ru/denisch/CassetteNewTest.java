@@ -23,9 +23,9 @@ class CassetteNewTest {
         CassetteNew cassette = new CassetteNew();
         List<Bill> bills = new ArrayList<>();
 
-        bills.add(new Bill("001"));
-        bills.add(new Bill("002"));
-        bills.add(new Bill("003"));
+        bills.add(new Bill("001", CurType.RUR50));
+        bills.add(new Bill("002", CurType.RUR50));
+        bills.add(new Bill("003", CurType.RUR50));
 
         cassette.put(bills);
 

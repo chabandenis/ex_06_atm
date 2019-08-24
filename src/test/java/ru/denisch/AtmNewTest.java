@@ -17,19 +17,19 @@ class AtmNewTest {
 
 
         List<Bill> bills50  = new ArrayList<>();
-        bills50.add(new Bill("r50 n001"));
-        bills50.add(new Bill("r50 n002"));
-        bills50.add(new Bill("r50 n003"));
+        bills50.add(new Bill("r50 n001", CurType.RUR50));
+        bills50.add(new Bill("r50 n002", CurType.RUR50));
+        bills50.add(new Bill("r50 n003", CurType.RUR50));
 
         List<Bill> bills100  = new ArrayList<>();
-        bills50.add(new Bill("r100 n001"));
-        bills50.add(new Bill("r100 n002"));
-        bills50.add(new Bill("r100 n003"));
+        bills50.add(new Bill("r100 n001", CurType.RUR100));
+        bills50.add(new Bill("r100 n002", CurType.RUR100));
+        bills50.add(new Bill("r100 n003", CurType.RUR100));
 
         List<Bill> bills500  = new ArrayList<>();
-        bills50.add(new Bill("r500 n001"));
-        bills50.add(new Bill("r500 n002"));
-        bills50.add(new Bill("r500 n003"));
+        bills50.add(new Bill("r500 n001", CurType.RUR500));
+        bills50.add(new Bill("r500 n002", CurType.RUR500));
+        bills50.add(new Bill("r500 n003", CurType.RUR500));
 
         atmNew.loadCassetes(bills50).loadCassetes(bills100).loadCassetes(bills500);
 
