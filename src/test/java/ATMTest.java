@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.Test;
-import ru.denisch.ATM;
 import ru.denisch.AtmException;
 import ru.denisch.CurType;
 

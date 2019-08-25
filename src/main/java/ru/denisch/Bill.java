@@ -15,6 +15,10 @@ public class Bill {
         this.curType = curType;
     }
 
+    public CurType getCurType() {
+        return curType;
+    }
+
     @Override
     public String toString() {
         return "Bill{" +

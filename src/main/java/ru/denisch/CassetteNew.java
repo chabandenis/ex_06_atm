@@ -7,7 +7,7 @@ public class CassetteNew {
     // в касете хранятся банкноты, не более 10
     private Deque<Bill> q = new ArrayDeque(10);
 
-    // добавить кюпюру в касету
+    // добавить кпюру в касету
     public void put(List<Bill> bills) {
         for (Bill b : bills) {
             q.add(b);
@@ -41,6 +41,14 @@ public class CassetteNew {
 
     // пустая касета
     public CassetteNew() {
+    }
+
+    // купюры в касете
+    public CurType getCurType(){
+        for(Bill bill : q){
+            return bill.getCurType();
+        }
+        return null;
     }
 
     @Override

@@ -1,8 +1,5 @@
 import org.junit.jupiter.api.Test;
 import ru.denisch.CurType;
-import ru.denisch.MoneyUnits;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class MoneyUnitsTest {
 

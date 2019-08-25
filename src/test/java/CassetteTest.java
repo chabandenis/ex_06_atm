@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.Test;
-import ru.denisch.Cassette;
 import ru.denisch.CurType;
 
 import static org.junit.jupiter.api.Assertions.*;
