@@ -4,7 +4,6 @@ import java.util.*;
 
 public class AtmNew {
     // в банкомате есть фиксированное количество касет
-    // банкомат знает, где купюра большего номинала
     private List<CassetteNew> cassettes = new ArrayList<>();
 
     // банкомат должен знать в какой касете сколько купюр
@@ -13,15 +12,47 @@ public class AtmNew {
     private Map<CassetteNew, Long> cntInCassete = new HashMap<>();
 
 
-
+    // по купюре определим нужную касету
+    private Map<Long, CassetteNew> casseteForMoney = new HashMap<>();
 
     // функция загрузки касет.
-    // сначала загружаются касеты с банкнотами минимального достоинства
     // в функции за один раз должны быть передаваться номиналы одного достоинства
-    // действия выполняет сотрудник банка и не автоматизированы
     public AtmNew loadCassetes(List<Bill> bills) {
-        cassettes.add(new CassetteNew(bills));
+        // сформировали касету
+        CassetteNew cassetteNew = new CassetteNew(bills);
+        // запомнили соответствие купюра- касета
+        casseteForMoney.put(bills.get(0).getCurType().cost(), cassetteNew);
+        // запонили сколько в касете денег
+        cntInCassete.put(cassetteNew, (long)bills.size());
+
+        cassettes.add(cassetteNew);
         return this;
+    }
+
+    // user add money
+    public long addMoney(Set<Bill> money) {
+        long retValue = 0;
+
+        System.out.println("before operation");
+        cassettes.toString();
+
+        for (Bill bill : money) {
+            CassetteNew cassetteNew = casseteForMoney.get(bill.getCurType().cost());
+            List<Bill> tmpList = new ArrayList<>();
+            tmpList.add(bill);
+            cassetteNew.put(tmpList);
+
+            // запонили сколько в касете денег
+            cntInCassete.put(cassetteNew, cntInCassete.get(cassetteNew) + 1);
+
+
+            retValue += bill.getCurType().cost();
+        }
+
+        System.out.println("after operation");
+        cassettes.toString();
+
+        return retValue;
     }
 
     // служебная функция, возвращает номиналы в касетах
@@ -49,55 +80,40 @@ public class AtmNew {
                 '}';
     }
 
-    public long getMoney(long value) throws AtmException {
+    /*
+        public long getMoney(long value) throws AtmException {
 
-        System.out.println("before operation");
+            System.out.println("before operation");
 
-        long retMoney = value;  //
+            long retMoney = value;  //
 
-        System.out.println("you want to take " + value);
+            System.out.println("you want to take " + value);
 
-        for (CassetteNew cassetteNew : cassettes) {
-            int price = MoneyUnits.getPrice(curType);
-            int cnt = 0;
-            if (price <= value) {
-                while (price * cassettes.getCount(curType) >= retMoney && retMoney != 0) {
-                    retMoney -= cassettes.getMoney(curType, 1);
-                    cnt++;
+            for (CassetteNew cassetteNew : cassettes) {
+                long price = cassetteNew.getCurType().cost();
+                int cnt = 0;
+                if (price <= value) {
+                    while (price * cassettes.getCount(curType) >= retMoney && retMoney != 0) {
+                        retMoney -= cassettes.getMoney(curType, 1);
+                        cnt++;
+                    }
+                }
+                if (cnt > 0) {
+                    System.out.println("    your money is " + price + " * " + cnt);
                 }
             }
-            if (cnt > 0) {
-                System.out.println("    your money is " + price + " * " + cnt);
+
+            if (retMoney > 0) {
+                throw new AtmException("atm doesn't have money for you. go to another atm");
             }
+
+            System.out.println("");
+            System.out.println("after operation");
+            cassettes.status();
+
+            return value;
+
         }
+    */
 
-        if (retMoney > 0) {
-            throw new AtmException("atm doesn't have money for you. go to another atm");
-        }
-
-        System.out.println("");
-        System.out.println("after operation");
-        cassettes.status();
-
-        return value;
-
-    }
-
-    // user add money
-    public long addMoney(CurType[] money) {
-        long retValue = 0;
-
-        System.out.println("before operation");
-        cassettes.status();
-
-        for (CurType curType : money) {
-            cassettes.putMoney(curType, 1);
-            retValue += MoneyUnits.getPrice(curType);
-        }
-
-        System.out.println("after operation");
-        cassettes.status();
-
-        return retValue;
-    }
 }

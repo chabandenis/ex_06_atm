@@ -5,7 +5,7 @@ import ru.denisch.CurType;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ATMTest {
-
+/*
     @Test
     public void testGetMoney() {
         ATM atm = new ATM();
@@ -29,4 +29,6 @@ class ATMTest {
         assertEquals(atm.addMoney(curTypes), 1000);
         assertEquals(atm.getAllPrice(), 3150);
     }
+
+ */
 }

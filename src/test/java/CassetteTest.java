@@ -4,6 +4,7 @@ import ru.denisch.CurType;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CassetteTest {
+    /*
     @Test
     void initCassette50() {
         Cassette cassette = new Cassette();
@@ -76,4 +77,6 @@ class CassetteTest {
         assertEquals(cassette.getCount(CurType.RUR500), 4);
 
     }
+
+     */
 }
