@@ -13,7 +13,7 @@ public class AtmNew {
 
 
     // по купюре определим нужную касету
-    private Map<Long, CassetteNew> casseteForMoney = new HashMap<>();
+    private Map<Integer, CassetteNew> casseteForMoney = new HashMap<>();
 
     // функция загрузки касет.
     // в функции за один раз должны быть передаваться номиналы одного достоинства
@@ -22,7 +22,7 @@ public class AtmNew {
         // сформировали касету
         CassetteNew cassetteNew = new CassetteNew(bills);
         // запомнили соответствие купюра- касета
-        casseteForMoney.put((long)bills.get(0).getCurType().getNominal(), cassetteNew);
+        casseteForMoney.put(bills.get(0).getCurType().getNominal(), cassetteNew);
         // запонили сколько в касете денег
         cntInCassete.put(cassetteNew, (long) bills.size());
 
