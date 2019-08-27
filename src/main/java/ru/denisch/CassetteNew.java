@@ -4,6 +4,9 @@ import java.util.*;
 
 public class CassetteNew {
 
+    // номинал
+    private CurType nominal;
+
     // в касете хранятся банкноты, не более 10
     private Deque<Bill> q = new ArrayDeque(10);
 
@@ -12,6 +15,7 @@ public class CassetteNew {
         for (Bill b : bills) {
             q.add(b);
         }
+        nominal = bills.get(0).getCurType();
     }
 
     // взять купюру из касеты
@@ -37,6 +41,7 @@ public class CassetteNew {
     // касету создать и передать набор купюр
     public CassetteNew( List<Bill> bills) {
         this.put(bills);
+        nominal = bills.get(0).getCurType();
     }
 
     // пустая касета
@@ -45,17 +50,14 @@ public class CassetteNew {
 
     // купюры в касете
     public CurType getCurType(){
-        for(Bill bill : q){
-            return bill.getCurType();
-        }
-        return null;
+        return nominal;
     }
 
     @Override
     public String toString() {
         StringBuffer str = new StringBuffer();
         for(Bill bill : q){
-            str.append(bill.toString());
+            str.append(bill.toString() + "\n") ;
         }
         return str.toString();
     }

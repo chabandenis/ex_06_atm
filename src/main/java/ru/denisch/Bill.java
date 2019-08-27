@@ -21,9 +21,6 @@ public class Bill {
 
     @Override
     public String toString() {
-        return "Bill{" +
-                "serNumber='" + serNumber + '\'' +
-                "curType='" + curType.cost() + '\'' +
-                '}';
+        return "sr=" + serNumber + "; " + "nom=" + curType.cost();
     }
 }

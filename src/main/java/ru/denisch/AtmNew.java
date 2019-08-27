@@ -17,24 +17,22 @@ public class AtmNew {
 
     // функция загрузки касет.
     // в функции за один раз должны быть передаваться номиналы одного достоинства
+    // инициализация в обратном порядке
     public AtmNew loadCassetes(List<Bill> bills) {
         // сформировали касету
         CassetteNew cassetteNew = new CassetteNew(bills);
         // запомнили соответствие купюра- касета
         casseteForMoney.put(bills.get(0).getCurType().cost(), cassetteNew);
         // запонили сколько в касете денег
-        cntInCassete.put(cassetteNew, (long)bills.size());
+        cntInCassete.put(cassetteNew, (long) bills.size());
 
         cassettes.add(cassetteNew);
         return this;
     }
 
     // user add money
-    public long addMoney(Set<Bill> money) {
+    public long addMoney(List<Bill> money) {
         long retValue = 0;
-
-        System.out.println("before operation");
-        cassettes.toString();
 
         for (Bill bill : money) {
             CassetteNew cassetteNew = casseteForMoney.get(bill.getCurType().cost());
@@ -48,9 +46,6 @@ public class AtmNew {
 
             retValue += bill.getCurType().cost();
         }
-
-        System.out.println("after operation");
-        cassettes.toString();
 
         return retValue;
     }
@@ -68,52 +63,48 @@ public class AtmNew {
 
     @Override
     public String toString() {
-        String tmpBills = "";
+        String tmpStatus = "";
 
-        for (Bill bill : status()) {
-            tmpBills += bill;
+        for (CassetteNew cassetteNew : cassettes) {
+            tmpStatus += cassetteNew.toString() + "; " + cntInCassete.get(cassetteNew) + "\n" ;
         }
 
-        return "AtmNew{" +
-                "cassettes=" + tmpBills +
-                ", cntInCassete=" + cntInCassete +
-                '}';
+        return tmpStatus;
     }
 
-    /*
-        public long getMoney(long value) throws AtmException {
 
-            System.out.println("before operation");
+    public List<Bill> getMoney(long value) throws AtmException {
+        List<Bill> tmpBills = new ArrayList<>();
 
-            long retMoney = value;  //
+        long retMoney = value;
 
-            System.out.println("you want to take " + value);
+        for (CassetteNew cassetteNew : cassettes) {
+//            System.out.println("касета " + cassetteNew.toString());
 
-            for (CassetteNew cassetteNew : cassettes) {
-                long price = cassetteNew.getCurType().cost();
-                int cnt = 0;
-                if (price <= value) {
-                    while (price * cassettes.getCount(curType) >= retMoney && retMoney != 0) {
-                        retMoney -= cassettes.getMoney(curType, 1);
-                        cnt++;
-                    }
-                }
-                if (cnt > 0) {
-                    System.out.println("    your money is " + price + " * " + cnt);
+            long price = cassetteNew.getCurType().cost();
+
+
+            if (price <= value) {
+                // есть купюры
+                // денег для списания больше, чем купюра в кассете
+                // остаток весь списан
+                while (cassetteNew.getCurType().cost() <= retMoney && retMoney != 0 && cntInCassete.get(cassetteNew) > 0) {
+                    List oneBill = new ArrayList();
+                    oneBill = cassetteNew.get(1);
+                    tmpBills.addAll(oneBill);
+                    // запонили сколько в касете денег
+                    cntInCassete.put(cassetteNew, cntInCassete.get(cassetteNew) - 1);
+                    retMoney -= cassetteNew.getCurType().cost();
                 }
             }
 
-            if (retMoney > 0) {
-                throw new AtmException("atm doesn't have money for you. go to another atm");
-            }
-
-            System.out.println("");
-            System.out.println("after operation");
-            cassettes.status();
-
-            return value;
 
         }
-    */
+
+        if (retMoney > 0) {
+            throw new AtmException("atm doesn't have money for you. go to another atm");
+        }
+        return tmpBills;
+    }
 
 }
