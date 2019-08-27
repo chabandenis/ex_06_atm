@@ -1,21 +1,18 @@
 package ru.denisch;
 
 public enum CurType {
-    RUR50 {
-        public long cost() {
-            return 50;
-        }
-    },
-    RUR100 {
-        public long cost() {
-            return 100;
-        }
-    },
-    RUR500 {
-        public long cost() {
-            return 500;
-        }
-    };
+    RUR50(50),
+    RUR100(100),
+    RUR500(500)
+    ;
 
-    public abstract long cost();
+    private int nominal;
+
+    CurType(int nominal) {
+        this.nominal = nominal;
+    }
+
+    public int getNominal() {
+        return nominal;
+    }
 }

@@ -21,6 +21,6 @@ public class Bill {
 
     @Override
     public String toString() {
-        return "sr=" + serNumber + "; " + "nom=" + curType.cost();
+        return "sr=" + serNumber + "; " + "nom=" + curType.getNominal();
     }
 }

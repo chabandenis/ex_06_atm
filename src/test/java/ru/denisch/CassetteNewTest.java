@@ -13,7 +13,7 @@ class CassetteNewTest {
 
         CurType curType = CurType.RUR100;
 
-        System.out.println("_" + curType.cost());
+        System.out.println("_" + curType.getNominal());
 
 
     }

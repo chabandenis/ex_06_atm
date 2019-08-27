@@ -22,7 +22,7 @@ public class AtmNew {
         // сформировали касету
         CassetteNew cassetteNew = new CassetteNew(bills);
         // запомнили соответствие купюра- касета
-        casseteForMoney.put(bills.get(0).getCurType().cost(), cassetteNew);
+        casseteForMoney.put((long)bills.get(0).getCurType().getNominal(), cassetteNew);
         // запонили сколько в касете денег
         cntInCassete.put(cassetteNew, (long) bills.size());
 
@@ -35,7 +35,7 @@ public class AtmNew {
         long retValue = 0;
 
         for (Bill bill : money) {
-            CassetteNew cassetteNew = casseteForMoney.get(bill.getCurType().cost());
+            CassetteNew cassetteNew = casseteForMoney.get(bill.getCurType().getNominal());
             List<Bill> tmpList = new ArrayList<>();
             tmpList.add(bill);
             cassetteNew.put(tmpList);
@@ -44,7 +44,7 @@ public class AtmNew {
             cntInCassete.put(cassetteNew, cntInCassete.get(cassetteNew) + 1);
 
 
-            retValue += bill.getCurType().cost();
+            retValue += bill.getCurType().getNominal();
         }
 
         return retValue;
@@ -81,20 +81,20 @@ public class AtmNew {
         for (CassetteNew cassetteNew : cassettes) {
 //            System.out.println("касета " + cassetteNew.toString());
 
-            long price = cassetteNew.getCurType().cost();
+            long price = cassetteNew.getCurType().getNominal();
 
 
             if (price <= value) {
                 // есть купюры
                 // денег для списания больше, чем купюра в кассете
                 // остаток весь списан
-                while (cassetteNew.getCurType().cost() <= retMoney && retMoney != 0 && cntInCassete.get(cassetteNew) > 0) {
+                while (cassetteNew.getCurType().getNominal() <= retMoney && retMoney != 0 && cntInCassete.get(cassetteNew) > 0) {
                     List oneBill = new ArrayList();
                     oneBill = cassetteNew.get(1);
                     tmpBills.addAll(oneBill);
                     // запонили сколько в касете денег
                     cntInCassete.put(cassetteNew, cntInCassete.get(cassetteNew) - 1);
-                    retMoney -= cassetteNew.getCurType().cost();
+                    retMoney -= cassetteNew.getCurType().getNominal();
                 }
             }
 
