@@ -1,7 +1,7 @@
 package ru.denisch;
 
 // купюра
-public class Bill {
+public class Bill implements BillBehavior{
 
     private String serNumber; // serial number of money
     private CurType curType;

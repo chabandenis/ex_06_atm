@@ -2,7 +2,7 @@ package ru.denisch;
 
 import java.util.*;
 
-public class Cassette {
+public class Cassette implements CasseteBehavior {
 
     // номинал
     private CurType nominal;

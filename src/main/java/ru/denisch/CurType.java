@@ -1,6 +1,6 @@
 package ru.denisch;
 
-public enum CurType {
+public enum CurType implements  CurTypeBehavior{
     RUR50(50),
     RUR100(100),
     RUR500(500)

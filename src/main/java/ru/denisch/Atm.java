@@ -2,7 +2,7 @@ package ru.denisch;
 
 import java.util.*;
 
-public class Atm {
+public class Atm implements AtmBehavior {
     // в банкомате есть фиксированное количество касет
     private List<Cassette> cassettes = new ArrayList<>();
 
