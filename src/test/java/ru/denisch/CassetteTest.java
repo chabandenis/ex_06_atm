@@ -6,7 +6,7 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CassetteNewTest {
+class CassetteTest {
 
     @Test
     void TestEnum() {
@@ -20,7 +20,7 @@ class CassetteNewTest {
 
     @Test
     void putGet() {
-        CassetteNew cassette = new CassetteNew();
+        Cassette cassette = new Cassette();
         List<Bill> bills = new ArrayList<>();
 
         bills.add(new Bill("001", CurType.RUR50));

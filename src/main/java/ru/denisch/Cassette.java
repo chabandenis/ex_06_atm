@@ -2,7 +2,7 @@ package ru.denisch;
 
 import java.util.*;
 
-public class CassetteNew {
+public class Cassette {
 
     // номинал
     private CurType nominal;
@@ -39,13 +39,13 @@ public class CassetteNew {
     }
 
     // касету создать и передать набор купюр
-    public CassetteNew( List<Bill> bills) {
+    public Cassette(List<Bill> bills) {
         this.put(bills);
         nominal = bills.get(0).getCurType();
     }
 
     // пустая касета
-    public CassetteNew() {
+    public Cassette() {
     }
 
     // купюры в касете
