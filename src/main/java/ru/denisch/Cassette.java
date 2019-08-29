@@ -7,11 +7,19 @@ public class Cassette {
     // номинал
     private CurType nominal;
 
+    // максимальное количество купюр в кассете
+    private static int maxCount = 10;
+
     // в касете хранятся банкноты, не более 10
-    private Deque<Bill> q = new ArrayDeque(10);
+    private Deque<Bill> q = new ArrayDeque(maxCount);
 
     // добавить кпюру в касету
-    public void put(List<Bill> bills) {
+    public void put(List<Bill> bills) throws AtmException {
+
+        if ((bills.size() + q.size())> maxCount){
+            throw new AtmException("Касета переполнена");
+        }
+
         for (Bill b : bills) {
             q.add(b);
         }
@@ -39,7 +47,7 @@ public class Cassette {
     }
 
     // касету создать и передать набор купюр
-    public Cassette(List<Bill> bills) {
+    public Cassette(List<Bill> bills) throws AtmException {
         this.put(bills);
         nominal = bills.get(0).getCurType();
     }

@@ -18,7 +18,7 @@ public class Atm {
     // функция загрузки касет.
     // в функции за один раз должны быть передаваться номиналы одного достоинства
     // инициализация в обратном порядке
-    public Atm loadCassetes(List<Bill> bills) {
+    public Atm loadCassetes(List<Bill> bills) throws AtmException {
         // сформировали касету
         Cassette cassette = new Cassette(bills);
         // запомнили соответствие купюра- касета
@@ -31,7 +31,7 @@ public class Atm {
     }
 
     // user add money
-    public long addMoney(List<Bill> money) {
+    public long addMoney(List<Bill> money) throws AtmException {
         long retValue = 0;
 
         for (Bill bill : money) {
@@ -66,7 +66,7 @@ public class Atm {
         String tmpStatus = "";
 
         for (Cassette cassette : cassettes) {
-            tmpStatus += cassette.toString() + "; " + cntInCassete.get(cassette) + "\n" ;
+            tmpStatus += cassette.toString() + "; " + cntInCassete.get(cassette) + "\n";
         }
 
         return tmpStatus;
@@ -101,9 +101,21 @@ public class Atm {
 
         }
 
-        if (retMoney > 0) {
-            throw new AtmException("atm doesn't have money for you. go to another atm");
+        int countMoney = 0;
+
+        // посмотрим, есть ли в банкомате деньги
+        for (Cassette cassette : cassettes) {
+            countMoney += cntInCassete.get(cassette);
         }
+
+        if (retMoney > 0 && countMoney > 0) {
+            throw new AtmException("Подходящие купюры отсутствуют в банкомате");
+        }
+
+        if (retMoney > 0 && countMoney == 0) {
+            throw new AtmException("Запрашиваемая сумма больше остатка в банкомате");
+        }
+
         return tmpBills;
     }
 
