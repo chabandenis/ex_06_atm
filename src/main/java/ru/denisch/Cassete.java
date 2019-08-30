@@ -2,12 +2,12 @@ package ru.denisch;
 
 import java.util.List;
 
-public interface CasseteBehavior {
+public interface Cassete {
 
     // добавить кпюру в касету
-    void put(List<Bill> bills) throws AtmException;
+    void put(List<BillImpl> billImpls) throws AtmException;
 
     // взять купюру из касеты
-    List<Bill> get(int cnt);
+    List<BillImpl> get(int cnt);
 
 }

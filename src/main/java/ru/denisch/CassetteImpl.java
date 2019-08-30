@@ -2,32 +2,32 @@ package ru.denisch;
 
 import java.util.*;
 
-public class Cassette implements CasseteBehavior {
+public class CassetteImpl implements Cassete {
 
     // номинал
-    private CurType nominal;
+    private CurTypeImpl nominal;
 
     // максимальное количество купюр в кассете
     private static int maxCount = 10;
 
     // в касете хранятся банкноты, не более 10
-    private Deque<Bill> q = new ArrayDeque(maxCount);
+    private Deque<BillImpl> q = new ArrayDeque(maxCount);
 
     // добавить кпюру в касету
-    public void put(List<Bill> bills) throws AtmException {
+    public void put(List<BillImpl> billImpls) throws AtmException {
 
-        if ((bills.size() + q.size())> maxCount){
+        if ((billImpls.size() + q.size())> maxCount){
             throw new AtmException("Касета переполнена");
         }
 
-        for (Bill b : bills) {
+        for (BillImpl b : billImpls) {
             q.add(b);
         }
-        nominal = bills.get(0).getCurType();
+        nominal = billImpls.get(0).getCurTypeImpl();
     }
 
     // взять купюру из касеты
-    public List<Bill> get(int cnt) {
+    public List<BillImpl> get(int cnt) {
         List tmpBill= new ArrayList();
         for(int i=0;i<cnt;i++){
             tmpBill.add(q.getLast());
@@ -37,35 +37,35 @@ public class Cassette implements CasseteBehavior {
     }
 
     // функция служебная. Аналог окрыть банкомат и посмотреть, а что в касете лежит, в какой последовательности и с какими серийными номерами
-    public List<Bill> getStatus(){
-        List<Bill> tmp = new ArrayList<>();
-        for(Bill bill : q){
-            tmp.add(bill);
+    public List<BillImpl> getStatus(){
+        List<BillImpl> tmp = new ArrayList<>();
+        for(BillImpl billImpl : q){
+            tmp.add(billImpl);
         }
 
         return tmp;
     }
 
     // касету создать и передать набор купюр
-    public Cassette(List<Bill> bills) throws AtmException {
-        this.put(bills);
-        nominal = bills.get(0).getCurType();
+    public CassetteImpl(List<BillImpl> billImpls) throws AtmException {
+        this.put(billImpls);
+        nominal = billImpls.get(0).getCurTypeImpl();
     }
 
     // пустая касета
-    public Cassette() {
+    public CassetteImpl() {
     }
 
     // купюры в касете
-    public CurType getCurType(){
+    public CurTypeImpl getCurType(){
         return nominal;
     }
 
     @Override
     public String toString() {
         StringBuffer str = new StringBuffer();
-        for(Bill bill : q){
-            str.append(bill.toString() + "\n") ;
+        for(BillImpl billImpl : q){
+            str.append(billImpl.toString() + "\n") ;
         }
         return str.toString();
     }

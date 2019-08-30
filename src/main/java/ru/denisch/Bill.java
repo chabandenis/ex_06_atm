@@ -1,26 +1,12 @@
 package ru.denisch;
 
-// купюра
-public class Bill implements BillBehavior{
+public interface Bill {
 
-    private String serNumber; // serial number of money
-    private CurType curType;
+    // получить серийный номер
+    String getSerNumber();
 
-    public String getSerNumber() {
-        return serNumber;
-    }
+    // номинал
+    CurTypeImpl getCurTypeImpl();
 
-    public Bill(String serNumber, CurType curType) {
-        this.serNumber = serNumber;
-        this.curType = curType;
-    }
 
-    public CurType getCurType() {
-        return curType;
-    }
-
-    @Override
-    public String toString() {
-        return "sr=" + serNumber + "; " + "nom=" + curType.getNominal();
-    }
 }
